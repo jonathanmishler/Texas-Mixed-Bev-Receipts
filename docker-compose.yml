@@ -1,0 +1,18 @@
+version: '3.8'
+
+services: 
+    db:
+        container_name: db_sql_bootcamp
+        image: timescale/timescaledb-postgis:2.3.0-pg13
+        restart: always
+        environment:
+            POSTGRES_DB: tx-mixed-bev
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: beer
+        volumes:
+            - dbdata:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+
+volumes: 
+    dbdata:
