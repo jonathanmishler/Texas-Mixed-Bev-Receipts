@@ -2,7 +2,7 @@ version: '3.8'
 
 services: 
     db:
-        container_name: db_sql_bootcamp
+        container_name: texas-mixed-bev-db
         image: timescale/timescaledb-postgis:2.3.0-pg13
         restart: always
         environment:

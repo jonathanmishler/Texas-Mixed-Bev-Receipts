@@ -1,2 +1,4 @@
-urllib3
-pydantic[dotenv]
+urllib3==1.26.6
+pydantic[dotenv]==1.8.2
+psycopg2-binary==2.7.7
+pgcopy
