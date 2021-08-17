@@ -3,29 +3,32 @@ import urllib3
 
 from config import Settings
 
-settings = Settings()
 
-http = urllib3.PoolManager()
+class Api:
+    def __init__(self) -> None:
+        self.settings = Settings()
+        self.http = urllib3.PoolManager()
+        self.url = "https://data.texas.gov/resource/naix-2893.json"
+        self.headers = {
+            "Accept": "application/json",
+            "X-App-Token": self.settings.tx_app_token,
+        }
+        self.order = "obligation_end_date_yyyymmdd,tabc_permit_number"
+        self.limit = 100000
+        self.offset = 0
 
-headers = {
-    "Accept": "application/json",
-    "X-App-Token": settings.tx_app_token
-}
+    @property
+    def params(self):
+        return {
+            "$order": self.order,
+            "$limit": self.limit,
+            "$offset": self.offset,
+        }
 
-params = {
-    "$order": "obligation_end_date_yyyymmdd,tabc_permit_number",
-    "$limit": 50,
-    "$offset": 0
-}
-
-url = "https://data.texas.gov/resource/naix-2893.json"
-
-r = http.request(
-    "GET",
-    url,
-    headers = headers,
-    fields = params
-) 
-
-print(r.geturl())
-print(json.loads(r.data.decode('utf-8')))
+    def get(self):
+        return self.http.request(
+            "GET", 
+            self.url, 
+            headers=self.headers, 
+            fields=self.params
+        )
