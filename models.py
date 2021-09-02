@@ -1,8 +1,10 @@
 from datetime import datetime
-from pydantic import BaseModel, Field
+from typing import Optional
+from sqlmodel import Field, SQLModel
 
 
-class Receipt(BaseModel):
+class Receipt(SQLModel, table=True):
+    receipt_id: Optional[int] = Field(defualt=None, primary_key=True)
     taxpayer_number: str = Field(None, max_length=15)
     taxpayer_name: str = Field(None, max_length=100)
     taxpayer_address: str = Field(None, max_length=100)
@@ -19,7 +21,9 @@ class Receipt(BaseModel):
     location_county: str = Field(None, max_length=3)
     inside_city_limits: bool = Field(None, alias="inside_outside_city_limits_code_y_n")
     tabc_permit_number: str = Field(None, max_length=10)
-    responsibility_begin: datetime = Field(None, alias="responsibility_begin_date_yyyymmdd")
+    responsibility_begin: datetime = Field(
+        None, alias="responsibility_begin_date_yyyymmdd"
+    )
     responsibility_end: datetime = Field(None, alias="responsibility_end_date_yyyymmdd")
     obligation_end: datetime = Field(None, alias="obligation_end_date_yyyymmdd")
     liquor_receipts: int = Field(None, ge=0)

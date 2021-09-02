@@ -2,3 +2,4 @@ urllib3
 pydantic[dotenv]
 psycopg2
 pgcopy
+sqlmodel
