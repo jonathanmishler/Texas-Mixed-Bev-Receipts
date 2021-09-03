@@ -1,11 +1,12 @@
 from pydantic import BaseSettings
 
 class Settings(BaseSettings):
-    tx_app_token: str
+    """ Settings for the Postgres Database """
     db_name: str
     db_user: str
     db_password: str
     db_host: str
+    db_port: str
 
     class Config:
         env_file = '.env'

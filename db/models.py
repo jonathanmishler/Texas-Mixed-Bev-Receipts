@@ -4,7 +4,7 @@ from sqlmodel import Field, SQLModel
 
 
 class Receipt(SQLModel, table=True):
-    receipt_id: Optional[int] = Field(defualt=None, primary_key=True)
+    receipt_id: Optional[int] = Field(default=None, primary_key=True)
     taxpayer_number: str = Field(None, max_length=15)
     taxpayer_name: str = Field(None, max_length=100)
     taxpayer_address: str = Field(None, max_length=100)
@@ -31,6 +31,3 @@ class Receipt(SQLModel, table=True):
     beer_receipts: int = Field(None, ge=0)
     cover_charge_receipts: int = Field(None, ge=0)
     total_receipts: int = Field(None, ge=0)
-
-    class Config:
-        schema_extra = {"db_table_name": "bev_receipts"}

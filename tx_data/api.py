@@ -1,10 +1,10 @@
 import json
 import urllib3
 
-from config import Settings
+from .config import Settings
 
 
-class Api:
+class Receipts:
     def __init__(self) -> None:
         self.settings = Settings()
         self.http = urllib3.PoolManager()
